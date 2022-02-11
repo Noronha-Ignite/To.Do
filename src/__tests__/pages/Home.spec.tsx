@@ -67,23 +67,4 @@ describe('Home', () => {
       textDecorationLine: 'line-through'
     });
   });
-
-  it('should be able to remove tasks after the trash icon was pressed', async () => {
-    const { getByPlaceholderText, getByText, getByTestId, queryByText } = render(<Home />);
-    const inputElement = getByPlaceholderText('Adicionar novo todo...');
-
-    fireEvent.changeText(inputElement, 'Primeira tarefa');
-    fireEvent(inputElement, 'submitEditing');
-    
-    fireEvent.changeText(inputElement, 'Segunda tarefa');
-    fireEvent(inputElement, 'submitEditing');
-
-    const firstTaskTrashIcon = getByTestId('trash-0');
-
-    fireEvent(firstTaskTrashIcon, 'press');
-
-    expect(queryByText('Primeira tarefa')).toBeNull();
-    expect(getByText('Segunda tarefa'));
-    expect(getByText('1 tarefa'));
-  });
 })
